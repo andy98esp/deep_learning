@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: infrastructure/Dockerfile
+      target: develop
+    image: andy_backend
+    command: tail -F ../infrastructure/Dockerfile
+    container_name: andy_dl_backend
+    env_file:
+      - ./env/dev.env
+    volumes:
+      - ../application:/sites/app/application
+    ports:
+      - "8000:8000"
